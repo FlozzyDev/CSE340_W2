@@ -1,6 +1,344 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
 }
+
+
+:root {
+  --primary-dark: #1a365d;
+  --primary-light: #ffffff;
+  --primary-accent: #2b6cb0;
+
+  --secondary-accent: #4a5568;
+  --background-light: rgb(254, 254, 254);
+  --border-color: #e2e8f0;
+
+  /* bootstrap-like base colors */ 
+  --success-color: #38a169;
+  --danger-color: #a13b38;
+  --warning-color: #b8af34;
+
+  /* Fonts */ 
+  --font-primary: 'Lato', sans-serif;
+  --font-secondary: 'Roboto', sans-serif;
+  
+  /* Default Font sizes */ 
+  --main-header: 1.75rem;
+  --sub-header: 1.25rem;
+  --lg-text: 1rem;
+  --med-text: 0.9rem;
+  --sm-text: 0.8rem;
+
+  /* Responsive text - mainly for the hero =( */
+  --vw-text-lg: 4vw;
+  --vw-text-med: 3.7vw;
+  --vw-text-sm: 3.3vw;
+
+}
+/* --------------------------- General Elements --------------------------- */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-primary);
+  color: var(--text-dark);
+  background-color: var(--background-light);
+  min-width: 340px;
+}
+
+#content-wrapper {
+  margin: 1.6rem;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary-light);
+}
+
+h1, h2, h3 {
+font-family: var(--font-secondary);
+color: var(--text-dark);
+margin: 1rem;
+}
+
+/* --------------------------- Header_partial --------------------------- */
+#top-header {
+display: flex;
+justify-content: space-between;
+margin-bottom: 1em;
+margin-top: 1em;
+}
+
+#sitename-text {
+  font-size: var(--main-header);
+  text-decoration: none;
+  font-family: var(--font-secondary);
+}
+
+#sitename-text, #sitename-text:visited, #sitename-text:hover, #sitename-text:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+#tools {
+  margin-right: 1em;
+}
+
+
+ #user-account {
+  font-size: var(--lg-text);
+  text-decoration: none;
+}
+
+#user-account, #user-account:visited, #user-account:hover, #user-account:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/* --------------------------- Navigation_partial --------------------------- */
+
+
+#main-nav{
+  background-color: var(--primary-dark);
+  padding: 0;
+}
+
+#main-nav-items {
+display: flex;
+justify-content: space-evenly;
+list-style: none;
+margin: 0;
+padding: 0;
+}
+
+#main-nav-items li {
+  flex: 1;
+}
+
+#main-nav-items a {
+  display: block;
+  color: var(--primary-light);
+  text-decoration: none;
+  padding: 12px 10px;
+  text-align: center;
+}
+
+/* --------------------------- Index.html --------------------------- */ 
+#main-heading {
+  font-size: var(--main-header);
+  margin-left: 0;
+}
+#section-heading {
+  font-size: var(--main-header)
+}
+/* --------------------------- Hero-section --------------------------- */
+
+#hero-section {
+  position: relative;
+  display: inline-block;
+  max-height: 400px;
+  overflow: hidden;
+}
+
+#hero-content {
+  position: absolute;
+  width: auto;
+  max-width: 40%;
+  max-height: 80%;
+  z-index: 2;
+  background: rgba(250, 250, 250, .7);
+  box-sizing: border-box;
+  margin: 0;
+}
+
+#hero-content h2 {
+  font-size: var(--vw-text-lg);
+  color: var(--primary-accent);
+  margin: 0;
+  margin-bottom: .5em;
+  width: max-content;
+}
+
+#hero-features p {
+  font-size: var(--vw-text-med);
+  color: var(--primary-accent);
+  margin: 0;
+}
+
+#hero-cta {
+  margin: 0;
+  text-align: center;
+}
+
+#cta-bun-img {
+  width: 100%;
+  height: auto;
+  max-width: 70%;
+  min-width: 50%;
+}
+
+#hero-text {
+  margin-bottom: 1rem;
+}
+
+#hero-image {
+  width: 100%;
+  height: auto;
+}
+
+/* --------------------------- Upgrade-section --------------------------- */
+
+#upgrade-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.upgrade-item {
+  text-align: center;
+}
+
+.upgrade-display {
+  background-color: var(--secondary-accent);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  height: 100px;
+}
+
+.upgrade-image {
+  max-width: 100%;
+  min-width: 50%;
+  object-fit: contain;
+}
+
+.upgrade-text {
+font-size: var(--med-text);
+}
+
+.review-item {
+  font-size: var(--lg-text);
+  padding-bottom: 2em;
+  }
+
+/* --------------------------- Footer_partial ----------------------------- */
+
+
+/* ---------------------------- Media Queries for non-mobile ----------------------------- */
+
+@media (min-width: 769px) {
+    :root {
+    --main-header: 3rem;
+    --sub-header: 2rem;
+    --lg-text: 1.4rem;
+    --med-text: 1.2rem;
+    --sm-text: 0.9rem;
+
+    --vw-text-lg: 2.5rem; /* =( */ 
+    --vw-text-med: 2.0rem;
+    --vw-text-sm: 1.3rem;
+  }
+
+  #hero-section {
+  margin: auto;
+  }
+
+  #hero-image {
+  width: 800px;
+  }
+
+  #hero-content {
+  max-width: 45%;
+  max-height: 100%;
+  }
+
+  #main-content {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  margin: 0 1rem;
+  }
+
+  #upgrades-section {
+  flex: 1;
+  order: 1;
+  margin: 1rem 0;
+  }
+
+  #upgrade-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  }
+
+  .upgrade-item {
+  text-align: center;
+  }
+
+  .upgrade-display {
+  background-color: var(--secondary-accent);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  height: 100px;
+  }
+
+  .upgrade-image {
+  max-width: 100%;
+  min-width: 50%;
+  object-fit: contain;
+  }
+
+  .upgrade-text {
+  font-size: var(--med-text);
+  }
+
+  #review-section {
+  flex: 1;
+  order: 2;
+  margin: 1rem 0;
+  }
+
+  #upgrade-options {
+  grid-template-columns: 1fr 1fr;
+  }
+
+  body {
+    background-image: url(/images/site/checkerboard.jpg);
+    margin: 2em 4em 2em 4em;
+  }
+
+  #body-wrapper {
+    background-color: white;
+    border: 2px solid var(--secondary-accent);
+    border-radius: 1em;
+  }
+
+  #hero-section {
+    max-height: 600px;
+    max-width: 1000px;
+  }
+
+  #content-wrapper {
+    margin: 1em;
+  }
+}
+
+/* Larger Screens */ 
+@media (min-width: 1280px) {
+  body {
+    margin: 2em 5em 2em 5em; /* slightly bigger on each side*/
+  }
+}
+

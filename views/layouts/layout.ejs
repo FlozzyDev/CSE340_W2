@@ -3,13 +3,15 @@
 <%- include('../partials/head') %>
 
     <body>
-        <div id="wrapper">
-            <%- include('../partials/header') %>
-                <%- include('../partials/navigation') %>
-                    <main>
-                        <%- body %>
-                    </main>
-                    <%- include('../partials/footer') %>
+        <div id="body-wrapper">
+            <div id="content-wrapper">
+                <%- include('../partials/header') %>
+                    <%- include('../partials/navigation') %>
+                        <main>
+                            <%- body %>
+                        </main>
+                        <%- include('../partials/footer') %>
+            </div>
         </div>
     </body>
 
