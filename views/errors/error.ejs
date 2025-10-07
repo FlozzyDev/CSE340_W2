@@ -1,0 +1,14 @@
+<!-- Content Heading -->
+<div id="error-heading">
+  <% if (title) { %>
+  <h1><%= title %></h1>
+  <% } else { res.redirect('/') } %>
+</div>
+
+<!-- Message -->
+<div id="error-container">
+  <div id="error-message"><%- message %></div>
+  <div id="error-graphic">
+    <%- include(`../../public/images/site/error.svg`) %>
+  </div>
+</div>

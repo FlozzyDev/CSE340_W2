@@ -10,6 +10,9 @@ const expressLayouts = require("express-ejs-layouts");
 const env = require("dotenv").config();
 const app = express();
 const static = require("./routes/static");
+const inventoryRoute = require("./routes/inventoryRoute");
+const baseController = require("./controllers/baseController");
+const utilities = require("./utilities/");
 
 /* ***********************
  View Engine and Templates
@@ -23,8 +26,30 @@ app.set("layout", "./layouts/layout");
  *************************/
 app.use(static);
 // Index Route
-app.get("/", function (req, res) {
-  res.render("index", { title: "Home" });
+app.get("/", utilities.handleErrors(baseController.buildHome));
+app.use("/inv", utilities.handleErrors(inventoryRoute));
+// generic file not found
+app.use(async (req, res, next) => {
+  next({ status: 404, message: "Sorry, we appear to have lost that page." });
+});
+
+/* ***********************
+ * Express Error Handler
+ * Place after all other middleware
+ *************************/
+app.use(async (err, req, res, next) => {
+  let nav = await utilities.getNav();
+  console.error(`Error at: "${req.originalUrl}": ${err.message}`);
+  if (err.status == 404) {
+    message = err.message;
+  } else {
+    message = "Oh no! There was a server error. Maybe try something different?";
+  }
+  res.render("errors/error", {
+    title: err.status || "Server Error: 500",
+    message,
+    nav,
+  });
 });
 
 /* ***********************
