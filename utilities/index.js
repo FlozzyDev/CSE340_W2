@@ -24,55 +24,62 @@ Util.getNav = async function (req, res, next) {
 
 Util.buildClassificationGrid = async function (data) {
   let grid;
-  // first we check the return is valid, else 404
-  if (!data || data.length === 0) {
+  // I was wrong! We want to check if the type doesn't exist, but we do want to return grid and not throw an error if there are simply no vehicles of that type...
+  if (!data) {
     const error = new Error(
-      "404: No data of that type found. Try again. Or don't. Please don't."
+      "500: Error fetching that type. Try again. Or don't. Please don't."
     );
-    error.status = 404;
+    error.status = 500;
     throw error;
-  } else grid = '<ul id="inv-display">';
-  data.forEach((vehicle) => {
-    grid += "<li id='inv-display-item'>";
-    grid +=
-      '<a href="../../inv/detail/' +
-      vehicle.inv_id +
-      '" title="View ' +
-      vehicle.inv_make +
-      " " +
-      vehicle.inv_model +
-      'detail"><img src="' +
-      vehicle.inv_thumbnail +
-      '" alt="Image of ' +
-      vehicle.inv_make +
-      " " +
-      vehicle.inv_model +
-      ' on CSE Motors" ></a>';
-    grid += '<div class="namePrice">';
-    grid += "<hr id='details-divider' >";
-    grid += "<h2>";
-    grid +=
-      '<a href="../../inv/detail/' +
-      vehicle.inv_id +
-      '" title="View ' +
-      vehicle.inv_make +
-      " " +
-      vehicle.inv_model +
-      ' detail">' +
-      vehicle.inv_make +
-      " " +
-      vehicle.inv_model +
-      "</a>";
-    grid += "</h2>";
-    grid +=
-      "<span>$" +
-      new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
-      "</span>";
-    grid += "</div>";
-    grid += "</li>";
-  });
-  grid += "</ul>";
-  return grid;
+  } else if (data.length === 1 && data[0].inv_id === null) {
+    // changed query - we always pull classification, and then we display a message if there are no vehicles of that classification (so long as it exists)
+    grid =
+      "<p id='error-message'> Sorry, we appear to be out of stock of that type. Check back later!</p>";
+    return grid;
+  } else {
+    grid = '<ul id="inv-display">';
+    data.forEach((vehicle) => {
+      grid += "<li id='inv-display-item'>";
+      grid +=
+        '<a href="../../inv/detail/' +
+        vehicle.inv_id +
+        '" title="View ' +
+        vehicle.inv_make +
+        " " +
+        vehicle.inv_model +
+        'detail"><img src="' +
+        vehicle.inv_thumbnail +
+        '" alt="Image of ' +
+        vehicle.inv_make +
+        " " +
+        vehicle.inv_model +
+        ' on CSE Motors" ></a>';
+      grid += '<div class="namePrice">';
+      grid += "<hr id='details-divider' >";
+      grid += "<h2>";
+      grid +=
+        '<a href="../../inv/detail/' +
+        vehicle.inv_id +
+        '" title="View ' +
+        vehicle.inv_make +
+        " " +
+        vehicle.inv_model +
+        ' detail">' +
+        vehicle.inv_make +
+        " " +
+        vehicle.inv_model +
+        "</a>";
+      grid += "</h2>";
+      grid +=
+        "<span>$" +
+        new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
+        "</span>";
+      grid += "</div>";
+      grid += "</li>";
+    });
+    grid += "</ul>";
+    return grid;
+  }
 };
 
 Util.buildItemDetail = async function (data) {
@@ -80,7 +87,7 @@ Util.buildItemDetail = async function (data) {
   // first we check the return is valid, else 404.
   if (!data || data.length === 0) {
     const error = new Error(
-      "404: That item was not found. Are you just trying to break these guys?"
+      "404: That item was not found. Are you just trying to cause an accident?"
     );
     error.status = 404;
     throw error;

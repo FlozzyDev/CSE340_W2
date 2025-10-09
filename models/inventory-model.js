@@ -9,10 +9,10 @@ async function getClassifications() {
 async function getInventoryByClassificationId(classification_id) {
   try {
     const data = await pool.query(
-      `SELECT * FROM public.inventory AS i 
-      JOIN public.classification AS c 
+      `SELECT * FROM public.classification AS c 
+      LEFT JOIN public.inventory AS i 
       ON i.classification_id = c.classification_id 
-      WHERE i.classification_id = $1`,
+      WHERE c.classification_id = $1`,
       [classification_id]
     );
     return data.rows;
