@@ -24,12 +24,13 @@ Util.getNav = async function (req, res, next) {
 
 Util.buildClassificationGrid = async function (data) {
   let grid;
+  console.log("data in buildClassificationGrid is: ", data);
   // I was wrong! We want to check if the type doesn't exist, but we do want to return grid and not throw an error if there are simply no vehicles of that type...
-  if (!data) {
+  if (!data || data.length === 0) {
     const error = new Error(
-      "500: Error fetching that type. Try again. Or don't. Please don't."
+      "404: Error fetching that type. Try again. Or don't. Please don't."
     );
-    error.status = 500;
+    error.status = 404;
     throw error;
   } else if (data.length === 1 && data[0].inv_id === null) {
     // changed query - we always pull classification, and then we display a message if there are no vehicles of that classification (so long as it exists)
