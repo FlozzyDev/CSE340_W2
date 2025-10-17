@@ -292,7 +292,7 @@ footer {
 }
 
 /* --------------------------- Inventory List page ----------------------------- */
-#inv-display {
+.inv-display {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -301,11 +301,11 @@ footer {
   gap: 1rem;
 }
 
-#inv-display li {
+.inv-display li {
   border: 3px solid var(--border-color);
   overflow: hidden;
 }
-#inv-display li img {
+.inv-display li img {
   width: 100%;
   height: auto;
   display: block;
@@ -343,7 +343,7 @@ footer {
 }
 
 /* --------------------------- Inventory Detail page ----------------------------- */
-#inv-detail-header {
+.inv-detail-header {
   list-style: none;
   color: var(--primary-dark);
   margin: 0;
@@ -353,32 +353,32 @@ footer {
   gap: 1rem;
 }
 
-#container-item-details {
+.container-item-details {
   display: flex;
   flex-direction: column; /* same design as inventory mobile */
   gap: 1rem;
 }
 
-#item-details-image {
+.item-details-image {
   max-width: 100%;
   height: auto;
   display: block;
   text-align: center;
 }
 
-#item-details-image hr {
+.item-details-image hr {
   margin-top: 2em;
   margin-bottom: 0;
   border: none;
   border-top: 1px solid var(--border-color);
 }
 
-#item-details-details {
+.item-details-details {
   padding: 1rem;
   border: 3px solid var(--border-color);
   overflow: hidden;
 }
-#item-details-list {
+.item-details-list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -389,7 +389,7 @@ footer {
   font-weight: bold;
 }
 
-#item-details-list li {
+.item-details-list li {
   font-size: var(--sub-header);
   padding: 0.3rem 0;
   margin: auto;
@@ -535,20 +535,20 @@ footer {
   }
   /* Media Section for Inventory Page ----------------------------------------------------------------------------------------- */
 
-  #inv-display {
+  .inv-display {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1.5rem;
     align-items: stretch;
   }
 
-  #inv-display li {
+  .inv-display li {
     display: flex;
     flex-direction: column;
     height: 100%;
   }
 
-  #inv-display li a {
+  .inv-display li a {
     justify-content: center;
     margin-top: auto;
     flex-shrink: 0;
@@ -570,16 +570,16 @@ footer {
 
   /* Media Section for Inventory Detail Page ----------------------------------------------------------------------------------------- */
 
-  #container-item-details {
+  .container-item-details {
     flex-direction: row;
     gap: 2rem;
   }
-  #item-details-image {
+  .item-details-image {
     flex: 1;
     max-width: 50%;
     align-self: center;
   }
-  #item-details-details {
+  .item-details-details {
     flex: 1;
     align-self: center;
   }
@@ -588,7 +588,7 @@ footer {
     font-size: var(--med-header);
   }
 
-  #details-divider {
+  .details-divider {
     display: none;
   }
 
