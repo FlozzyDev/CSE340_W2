@@ -38,6 +38,29 @@
   --vw-text-med: 3.7vw;
   --vw-text-sm: 3.3vw;
 }
+
+input:required:invalid,
+input:focus:invalid {
+  border-color: var(--danger-color);
+  border-width: 2px;
+}
+
+input:required:valid {
+  border-color: var(--success-color);
+  border-width: 2px;
+}
+
+textarea:required:invalid,
+textarea:focus:invalid {
+  border-color: var(--danger-color);
+  border-width: 2px;
+}
+
+textarea:required:valid {
+  border-color: var(--success-color);
+  border-width: 2px;
+}
+
 /* --------------------------- General Elements --------------------------- */
 
 body {
@@ -141,6 +164,176 @@ h3 {
 #main-nav-items a:hover {
   background-color: var(--primary-accent);
   text-decoration: none;
+}
+
+/* --------------------------- Login Page --------------------------- */
+
+.login_header {
+  text-align: center;
+  color: var(--primary-dark);
+  font-size: var(--main-header);
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+form {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--primary-dark);
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: var(--primary-light);
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: var(--primary-dark);
+}
+
+textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: var(--primary-dark);
+  font-family: inherit;
+  resize: vertical;
+  vertical-align: top;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary-accent);
+  color: var(--primary-dark);
+}
+
+#login_button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+#login_button:hover {
+  background-color: var(--primary-accent);
+  color: var(--primary-light);
+}
+form span {
+  text-align: center;
+  color: var(--primary-light);
+  font-size: var(--med-text);
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#registration_link {
+  display: block;
+  text-align: center;
+  color: var(--primary-light);
+  text-decoration: none;
+  font-size: var(--lg-text);
+  font-weight: bold;
+}
+
+#registration_link:hover {
+  text-decoration: underline;
+  color: var(--primary-light);
+}
+
+#registration_link:visited {
+  text-decoration: none;
+  color: var(--primary-light);
+}
+
+/* --------------------------- Registration Page --------------------------- */
+
+.registration_header {
+  text-align: center;
+  color: var(--primary-dark);
+  font-size: var(--main-header);
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#registration_button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+#registration_button:hover {
+  background-color: var(--primary-accent);
+  color: var(--primary-light);
+}
+
+.password-req {
+  color: var(--primary-light);
+  font-size: var(--sm-text);
+  margin-top: 8px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+.notice-form-success {
+  color: var(--success-color);
+  list-style: none;
+  text-align: center;
+  font-size: var(--med-text);
+}
+.notice-form-failed {
+  color: var(--danger-color);
+  list-style: none;
+  text-align: center;
+  font-size: var(--med-text);
 }
 
 /* --------------------------- Index.html --------------------------- */
@@ -434,6 +627,133 @@ footer {
   text-align: center;
 }
 
+/* --------------------------- Management View ----------------------------- */
+.container-management-view {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.management-view-description {
+  font-size: var(--med-text);
+  font-weight: bold;
+  margin-left: 1rem;
+  padding: 0;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 0 1rem;
+}
+.management-add-classification,
+.management-add-inventory {
+  display: flex;
+  margin-left: 1rem;
+}
+.management-add-classification-button,
+.management-add-inventory-button {
+  display: inline-block;
+  background-color: var(--primary-dark);
+  color: var(--primary-light);
+  margin-left: 1rem;
+  border-radius: 4px;
+  font-size: 16px;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+}
+
+.management-add-classification-button:hover,
+.management-add-inventory-button:hover {
+  background-color: var(--primary-accent);
+  color: var(--primary-light);
+  cursor: pointer;
+}
+
+.management-add-classification-form {
+  margin-left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 3px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.management-add-classification-label {
+  font-size: var(--sub-header);
+  color: var(--primary-dark);
+  text-align: center;
+  font-weight: bold;
+  margin-left: 1rem;
+  padding: 0;
+}
+
+.management-add-classification-req {
+  font-size: var(--sm-text);
+  color: var(--danger-color);
+  font-weight: bold;
+  text-align: center;
+  margin-left: 1rem;
+  padding: 0;
+}
+
+/* --------------------------- Add Inventory Page ------------------------------------------------------------------ */
+
+.inv-add-header {
+  font-size: var(--med-header);
+  color: var(--primary-dark);
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.classificationList {
+  font-size: var(--sub-header);
+  color: var(--primary-dark);
+  text-align: center;
+  font-weight: bold;
+  margin-left: 1rem;
+  padding: 0;
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: var(--primary-dark);
+  background-color: white;
+  cursor: pointer;
+}
+
+.add-inventory-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  padding: 0.5rem 1rem;
+  margin: 0 auto;
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.add-inventory-button:hover {
+  background-color: var(--primary-accent);
+  color: var(--primary-light);
+  cursor: pointer;
+}
+
 /* ---------------------------- Media Queries for non-mobile ----------------------------- */
 
 @media (min-width: 769px) {
@@ -448,6 +768,17 @@ footer {
     --vw-text-lg: 2.5rem; /* =( */
     --vw-text-med: 2rem;
     --vw-text-sm: 1.3rem;
+  }
+
+  /* Media Section for Forms ----------------------------------------------------------------------------------------- */
+
+  form {
+    min-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--primary-dark);
   }
 
   #hero-section {

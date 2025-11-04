@@ -1,67 +1,84 @@
 <h2 id="main-heading">Welcome to CSE Motors!</h2>
 
+<%- messages() %>
+
 <section id="hero-section">
-    <div id="hero-content">
-        <div id="hero-text">
-            <h2 class="sub-header">DMC Delorean</h2>
-            <div id="hero-features">
-                <p>3 Cup holders</p>
-                <p>Superman doors</p>
-                <p>Fuzzy dice!</p>
-            </div>
-        </div>
-        <div id="hero-cta">
-            <a href="/cars/delorean/"><img id="cta-bun-img" src="/images/site/own_today.png"
-                    alt="A button to purchase this car"></a>
-        </div>
+  <div id="hero-content">
+    <div id="hero-text">
+      <h2 class="sub-header">DMC Delorean</h2>
+      <div id="hero-features">
+        <p>3 Cup holders</p>
+        <p>Superman doors</p>
+        <p>Fuzzy dice!</p>
+      </div>
     </div>
-    <img id="hero-image" src="/images/vehicles/delorean.jpg" alt="An cartoon image of a silver delorean vehicle">
+    <div id="hero-cta">
+      <a href="/cars/delorean/"
+        ><img
+          id="cta-bun-img"
+          src="/images/site/own_today.png"
+          alt="A button to purchase this car"
+      /></a>
+    </div>
+  </div>
+  <img
+    id="hero-image"
+    src="/images/vehicles/delorean.jpg"
+    alt="An cartoon image of a silver delorean vehicle" />
 </section>
 
 <div id="main-content">
+  <section id="review-section">
+    <h2 class="sub-header">DMC Delorean Reviews</h2>
+    <ul>
+      <li class="review-item">
+        "So fast it's almost like traveling in time" (4/5)
+      </li>
+      <li class="review-item">"Coolest ride on the road." (4/5)</li>
+      <li class="review-item">"I'm feeling McFly" (5/5)</li>
+      <li class="review-item">"80's livin and I love it!" (5/5)</li>
+    </ul>
+  </section>
 
-    <section id="review-section">
-        <h2 class="sub-header">DMC Delorean Reviews</h2>
-        <ul>
-            <li class="review-item">"So fast it's almost like traveling in time" (4/5)</li>
-            <li class="review-item">"Coolest ride on the road." (4/5)</li>
-            <li class="review-item">"I'm feeling McFly" (5/5)</li>
-            <li class="review-item">"80's livin and I love it!" (5/5)</li>
-        </ul>
-    </section>
-
-    <section id="upgrades-section">
-        <h2 class="sub-header">Delorean Upgrades</h2>
-        <div id="upgrade-options">
-            <div class="upgrade-item">
-                <div class="upgrade-display">
-                    <img class="upgrade-image" src="/images/upgrades/flux-cap.png"
-                        alt="A fancy piece of electronic hardware">
-                </div>
-                <a class="upgrade-text" href="/upgrade/">Flux Capacitor</a>
-            </div>
-            <div class="upgrade-item">
-                <div class="upgrade-display">
-                    <img class="upgrade-image" src="/images/upgrades/flame.jpg" alt="A sweet looking cartoon flame">
-                </div>
-                <a class="upgrade-text" href="/upgrade/">Flame Decals</a>
-
-            </div>
-            <div class="upgrade-item">
-                <div class="upgrade-display">
-                    <img class="upgrade-image" src="/images/upgrades/bumper_sticker.jpg"
-                        alt='An example bumper sticker saying "hello world"'>
-                </div>
-                <a class="upgrade-text" href="/upgrade/">Bumper Stickers</a>
-            </div>
-            <div class="upgrade-item">
-                <div class="upgrade-display">
-                    <img class="upgrade-image" src="/images/upgrades/hub-cap.jpg"
-                        alt="A fancy piece of electronic hardware">
-                </div>
-                <a class="upgrade-text" href="/upgrade/">Hub Caps</a>
-            </div>
+  <section id="upgrades-section">
+    <h2 class="sub-header">Delorean Upgrades</h2>
+    <div id="upgrade-options">
+      <div class="upgrade-item">
+        <div class="upgrade-display">
+          <img
+            class="upgrade-image"
+            src="/images/upgrades/flux-cap.png"
+            alt="A fancy piece of electronic hardware" />
         </div>
-    </section>
-
+        <a class="upgrade-text" href="/upgrade/">Flux Capacitor</a>
+      </div>
+      <div class="upgrade-item">
+        <div class="upgrade-display">
+          <img
+            class="upgrade-image"
+            src="/images/upgrades/flame.jpg"
+            alt="A sweet looking cartoon flame" />
+        </div>
+        <a class="upgrade-text" href="/upgrade/">Flame Decals</a>
+      </div>
+      <div class="upgrade-item">
+        <div class="upgrade-display">
+          <img
+            class="upgrade-image"
+            src="/images/upgrades/bumper_sticker.jpg"
+            alt='An example bumper sticker saying "hello world"' />
+        </div>
+        <a class="upgrade-text" href="/upgrade/">Bumper Stickers</a>
+      </div>
+      <div class="upgrade-item">
+        <div class="upgrade-display">
+          <img
+            class="upgrade-image"
+            src="/images/upgrades/hub-cap.jpg"
+            alt="A fancy piece of electronic hardware" />
+        </div>
+        <a class="upgrade-text" href="/upgrade/">Hub Caps</a>
+      </div>
+    </div>
+  </section>
 </div>

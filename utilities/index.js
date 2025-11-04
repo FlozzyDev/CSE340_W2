@@ -134,6 +134,53 @@ Util.buildItemDetail = async function (data) {
   }
 };
 
+// super basic view of just the 2 buttons for the links - making it generic in case we add more options besides add
+Util.buildManagementView = async function () {
+  let managementView = '<div class="container-management-view">';
+  managementView +=
+    "<p class='management-view-description'>Manage the classifications and inventory of the dealership.</p>";
+
+  managementView += "<hr class='divider' >";
+
+  managementView += '<div class="management-classification">';
+  managementView += "<h2>Classification</h2>";
+  managementView +=
+    '<a href="/inv/management/addClassification" class="management-add-classification-button">Add Classification +</a>';
+  managementView += "</div>";
+
+  managementView += "<hr class='divider' >";
+
+  managementView += '<div class="management-inventory">';
+  managementView += "<h2>Inventory</h2>";
+  managementView +=
+    '<a href="/inv/management/addInventory" class="management-add-inventory-button">Add Inventory +</a>';
+  managementView += "</div>";
+
+  managementView += "<hr class='divider' >";
+
+  managementView += "</div>";
+  return managementView;
+};
+
+Util.buildClassificationList = async function (classification_id = null) {
+  let data = await invModel.getClassifications();
+  let classificationList =
+    '<select name="classification_id" id="classificationList" required>';
+  classificationList += "<option value=''>Choose a Classification</option>";
+  data.rows.forEach((row) => {
+    classificationList += '<option value="' + row.classification_id + '"';
+    if (
+      classification_id != null &&
+      row.classification_id == classification_id
+    ) {
+      classificationList += " selected ";
+    }
+    classificationList += ">" + row.classification_name + "</option>";
+  });
+  classificationList += "</select>";
+  return classificationList;
+};
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for

@@ -1,0 +1,94 @@
+<!-- Content Heading -->
+<% if (title) { %>
+<h1 class="inv-add-header"><%= title %></h1>
+<% } else { res.redirect('/') } %>
+
+<!-- Message -->
+<%- messages() %> <% if (errors) { %>
+<ul class="notice-form-failed">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<!-- Add Inventory Form -->
+<div class="form-container">
+  <form action="/inv/management/newInventory" method="post">
+    <label for="inv_make">Make</label>
+    <input
+      type="text"
+      id="inv_make"
+      name="inv_make"
+      required
+      pattern="^[a-zA-Z0-9]+$"
+      placeholder="Must be letters and numbers only"
+      value="<%= locals.inv_make %>" />
+
+    <label for="inv_model">Model</label>
+    <input
+      type="text"
+      id="inv_model"
+      name="inv_model"
+      required
+      pattern="^[a-zA-Z0-9]+$"
+      placeholder="Must be letters and numbers only"
+      value="<%= locals.inv_model %>" />
+
+    <label for="inv_year">Year</label>
+    <input
+      type="number"
+      id="inv_year"
+      name="inv_year"
+      required
+      min="1900"
+      max="<%= new Date().getFullYear() + 1 %>"
+      placeholder="Must be a valid year (1900-<%= new Date().getFullYear() + 1 %>)"
+      value="<%= locals.inv_year %>" />
+
+    <label for="inv_description">Description</label>
+    <textarea
+      id="inv_description"
+      name="inv_description"
+      placeholder="Minimum 6 character, Maximum 200 characters"
+      maxlength="200"
+      minlength="6"
+      required>
+<%= locals.inv_description %></textarea
+    >
+
+    <label for="inv_price">Price</label>
+    <input
+      type="number"
+      id="inv_price"
+      name="inv_price"
+      required
+      min="0"
+      placeholder="Must be a positive number"
+      value="<%= locals.inv_price %>" />
+
+    <label for="inv_miles">Miles</label>
+    <input
+      type="number"
+      id="inv_miles"
+      name="inv_miles"
+      required
+      min="0"
+      placeholder="Must be a positive number"
+      value="<%= locals.inv_miles %>" />
+
+    <label for="inv_color">Color</label>
+    <input
+      type="text"
+      id="inv_color"
+      name="inv_color"
+      required
+      placeholder="Must be letters only"
+      pattern="^[a-zA-Z]+$"
+      value="<%= locals.inv_color %>" />
+
+    <label for="classificationList">Classification</label>
+    <%- classificationList %>
+    <button class="add-inventory-button" type="submit">Add Vehicle</button>
+  </form>
+</div>
