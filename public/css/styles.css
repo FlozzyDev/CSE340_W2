@@ -721,7 +721,7 @@ footer {
 }
 
 select {
-  width: 100%;
+  width: 50%;
   padding: 10px;
   margin-bottom: 20px;
   border: 1px solid var(--border-color);
@@ -752,6 +752,21 @@ select {
   background-color: var(--primary-accent);
   color: var(--primary-light);
   cursor: pointer;
+}
+
+#inventoryDisplay {
+  width: 50%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+#inventoryDisplay thead {
+  display: flex;
+  font-size: var(--med-text);
+  font-weight: bold;
+  justify-content: space-between;
+  color: var(--primary-dark);
 }
 
 /* ---------------------------- Media Queries for non-mobile ----------------------------- */

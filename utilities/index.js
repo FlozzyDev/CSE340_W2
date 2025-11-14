@@ -1,6 +1,8 @@
 const e = require("express");
 const invModel = require("../models/inventory-model");
 const Util = {};
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications();
@@ -134,8 +136,9 @@ Util.buildItemDetail = async function (data) {
   }
 };
 
-// super basic view of just the 2 buttons for the links - making it generic in case we add more options besides add
+// Now on week 9 I believe this was done wrong, checking with Brother Shepherd if this is okay or if I need to break it down.
 Util.buildManagementView = async function () {
+  const classificationSelect = await Util.buildClassificationList();
   let managementView = '<div class="container-management-view">';
   managementView +=
     "<p class='management-view-description'>Manage the classifications and inventory of the dealership.</p>";
@@ -159,6 +162,13 @@ Util.buildManagementView = async function () {
   managementView += "<hr class='divider' >";
 
   managementView += "</div>";
+  managementView += "<h2>Manage Inventory</h2>";
+  managementView += "<p>Select a classification to manage its inventory.</p>";
+  managementView += classificationSelect;
+  managementView += "<table id='inventoryDisplay'></table>";
+  managementView +=
+    "<noscript>JavaScript must be enabled to use this page.</noscript></div>";
+
   return managementView;
 };
 
@@ -182,11 +192,47 @@ Util.buildClassificationList = async function (classification_id = null) {
 };
 
 /* ****************************************
+ * Middleware to check token validity
+ **************************************** */
+Util.checkJWTToken = (req, res, next) => {
+  if (req.cookies.jwt) {
+    jwt.verify(
+      req.cookies.jwt,
+      process.env.ACCESS_TOKEN_SECRET,
+      function (err, accountData) {
+        if (err) {
+          req.flash("Please log in");
+          res.clearCookie("jwt");
+          return res.redirect("/account/login");
+        }
+        res.locals.accountData = accountData;
+        res.locals.loggedin = 1;
+        next();
+      }
+    );
+  } else {
+    next();
+  }
+};
+
+/* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for
  * General Error Handling
  **************************************** */
 Util.handleErrors = (fn) => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
+
+/* ****************************************
+ *  Check Login
+ * ************************************ */
+Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next();
+  } else {
+    req.flash("notice", "Please log in.");
+    return res.redirect("/account/login");
+  }
+};
 
 module.exports = Util;

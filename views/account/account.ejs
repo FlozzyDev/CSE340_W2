@@ -1,0 +1,16 @@
+<!-- Content Heading -->
+<% if (title) { %>
+<h1 class="account_header"><%= title %></h1>
+<% } else { res.redirect('/') } %>
+
+<!-- Message -->
+<%- messages() %> <% if (errors) { %>
+<ul class="notice-form-failed">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<!-- Account Page -->
+<p>You're logged in</p>

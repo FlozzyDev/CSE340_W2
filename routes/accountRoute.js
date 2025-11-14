@@ -4,7 +4,10 @@ const utilities = require("../utilities");
 const accountController = require("../controllers/accountController");
 const regValidate = require("../utilities/account-validation");
 
+router.get("/", utilities.handleErrors(accountController.buildAccountPage));
+
 router.get("/login", utilities.handleErrors(accountController.buildLoginPage));
+
 router.get(
   "/register",
   utilities.handleErrors(accountController.buildRegistrationPage)
@@ -22,13 +25,7 @@ router.post(
   "/login",
   regValidate.loginRules(),
   regValidate.checkLoginData,
-  (req, res) => {
-    res
-      .status(200)
-      .send(
-        "login process successful (you got through validation) we should actually make a page here..."
-      );
-  }
+  utilities.handleErrors(accountController.accountLogin)
 );
 
 module.exports = router;
