@@ -254,6 +254,45 @@ invCont.updateInventory = async function (req, res) {
   }
 };
 
+invCont.buildDeleteInventoryPage = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  const inv_id = parseInt(req.params.inv_id);
+  const inventoryData = await invModel.getItemById(inv_id);
+  const itemData = inventoryData[0];
+  res.render("./inventory/delete-inventory", {
+    title: `Delete ${itemData.inv_make} ${itemData.inv_model}`,
+    nav,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    inv_price: itemData.inv_price,
+    errors: null,
+  });
+};
+
+invCont.deleteInventory = async function (req, res) {
+  const { inv_id } = req.body;
+  const deleteResult = await invModel.deleteInventoryItem(inv_id);
+  if (deleteResult) {
+    console.log("(controller) Inventory deleted successfully", inv_id);
+    req.flash("notice-form-success", "Inventory deleted successfully");
+    res.redirect("/inv/management");
+  } else {
+    console.log("(controller) Inventory failed to delete", inv_id);
+    req.flash("notice-form-failed", "Inventory failed to delete");
+    res.status(501).render("inventory/delete-inventory", {
+      title: `Delete ${inv_make} ${inv_model}`,
+      nav,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_price,
+      errors: req.flash("notice-form-failed"),
+    });
+  }
+};
 /* ***************************
  *  Return Inventory by Classification As JSON
  * ************************** */

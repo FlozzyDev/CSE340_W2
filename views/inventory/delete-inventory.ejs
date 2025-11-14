@@ -1,0 +1,72 @@
+<!-- Content Heading -->
+<% if (title) { %>
+<h1 class="inv-add-header"><%= title %></h1>
+<% } else { res.redirect('/') } %>
+
+<!-- Message -->
+<%- messages() %> <% if (errors) { %>
+<ul class="notice-form-failed">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<!-- EditInventory Form -->
+<div class="form-container">
+  <form id="deleteForm" action="/inv/management/delete" method="post">
+    <p class="delete-inventory-confirmation">
+      Are you sure you want to delete this vehicle?
+    </p>
+    <p class="delete-inventory-confirmation">There is no going back.</p>
+
+    <label for="inv_make">Make</label>
+    <input
+      readonly
+      type="text"
+      id="inv_make"
+      name="inv_make"
+      required
+      pattern="^[a-zA-Z0-9]+$"
+      placeholder="Must be letters and numbers only"
+      value="<%= locals.inv_make %>" />
+
+    <label for="inv_model">Model</label>
+    <input
+      readonly
+      type="text"
+      id="inv_model"
+      name="inv_model"
+      required
+      pattern="^[a-zA-Z0-9]+$"
+      placeholder="Must be letters and numbers only"
+      value="<%= locals.inv_model %>" />
+
+    <label for="inv_year">Year</label>
+    <input
+      readonly
+      type="number"
+      id="inv_year"
+      name="inv_year"
+      required
+      min="1900"
+      max="<%= new Date().getFullYear() + 1 %>"
+      placeholder="Must be a valid year (1900-<%= new Date().getFullYear() + 1 %>)"
+      value="<%= locals.inv_year %>" />
+
+    <label for="inv_price">Price</label>
+    <input
+      readonly
+      type="number"
+      id="inv_price"
+      name="inv_price"
+      required
+      min="0"
+      placeholder="Must be a positive number"
+      value="<%= locals.inv_price %>" />
+    <button class="delete-inventory-button" type="submit">
+      Delete Vehicle
+    </button>
+    <input type="hidden" name="inv_id" value="<%= locals.inv_id %>" />
+  </form>
+</div>

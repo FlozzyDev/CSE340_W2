@@ -26,7 +26,14 @@ router.get(
 // This route creates the same "addInevntoryPage" form but with the data filled in
 router.get(
   "/management/edit/:inv_id",
+  utilities.checkLogin,
   handleErrors(invController.buildEditInventoryPage)
+);
+
+router.get(
+  "/management/delete/:inv_id",
+  utilities.checkLogin,
+  handleErrors(invController.buildDeleteInventoryPage)
 );
 
 router.post(
@@ -35,6 +42,12 @@ router.post(
   invValidate.inventoryRules(),
   invValidate.checkUpdateData,
   handleErrors(invController.updateInventory)
+);
+
+router.post(
+  "/management/delete",
+  utilities.checkLogin,
+  handleErrors(invController.deleteInventory)
 );
 
 // the posts to send the data, pass through validation first (like with account)
