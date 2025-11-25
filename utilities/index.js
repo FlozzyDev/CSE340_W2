@@ -234,5 +234,41 @@ Util.checkLogin = (req, res, next) => {
     return res.redirect("/account/login");
   }
 };
+// All management routes will use this to check account type
+Util.checkAccountType = (req, res, next) => {
+  if (res.locals.loggedin && res.locals.accountData) {
+    const accountType = res.locals.accountData.account_type;
+    // if employee or admin, next
+    if (accountType === "Employee" || accountType === "Admin") {
+      next();
+      // else display message and bring them back to account
+    } else {
+      req.flash(
+        "notice",
+        "You do not have permission to access this resource."
+      );
+      return res.redirect("/account");
+    }
+  } else {
+    req.flash("notice", "Please log in with an authorized account.");
+    return res.redirect("/account/login");
+  }
+};
+
+// We need to check if the account id is the same as the logged in user, or I can just change the hidden field
+
+Util.checkAccountId = (req, res, next) => {
+  const account_id = parseInt(req.body.account_id);
+
+  if (res.locals.accountData.account_id !== account_id) {
+    req.flash(
+      "notice",
+      "ERROR: You can only update your own account. Stop trying to hack the system."
+    );
+    return res.redirect("/account/");
+  }
+
+  next();
+};
 
 module.exports = Util;

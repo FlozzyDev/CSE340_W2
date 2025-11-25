@@ -1,6 +1,6 @@
 <!-- Content Heading -->
 <% if (title) { %>
-<h1 class="account_header"><%= title %></h1>
+<h1 class="account-page-header"><%= title %></h1>
 <% } else { res.redirect('/') } %>
 
 <!-- Message -->
@@ -12,5 +12,31 @@
 </ul>
 <% } %>
 
-<!-- Account Page -->
-<p>You're logged in</p>
+<!-- Account Page Content -->
+<div class="account-page-content">
+  <% if (locals.accountData) { %>
+  <h2 class="account-welcome-text">
+    Welcome Back, <%= accountData.account_firstname %>
+  </h2>
+
+  <h2 class="account-update-header">Update Account Information</h2>
+  <p class="account-update-link">
+    <a
+      href="/account/update/<%= accountData.account_id %>"
+      title="Update your account information">
+      Account Management
+    </a>
+  </p>
+
+  <% if (accountData.account_type === "Employee" || accountData.account_type ===
+  "Admin") { %>
+  <h3 class="account-inventory-header">Inventory Management</h3>
+  <p class="account-inventory-link">
+    <a href="/inv/management" title="Manage the inventory">
+      Manage Inventory
+    </a>
+  </p>
+  <% } %> <% } else { %>
+  <p>Please log in to view your account.</p>
+  <% } %>
+</div>

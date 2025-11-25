@@ -798,6 +798,109 @@ select {
   color: var(--primary-dark);
 }
 
+/* ----------------------- ---- Account Page -------------------------------------------- */
+.account-page-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.account-welcome-text {
+  font-size: var(--med-header);
+  color: var(--primary-dark);
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.account-update-link {
+  font-size: var(--med-text);
+  color: var(--primary-dark);
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.account-inventory-link {
+  font-size: var(--med-text);
+  color: var(--primary-dark);
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.account-update-header {
+  font-size: var(--small-header);
+  color: var(--primary-dark);
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.account-inventory-header {
+  font-size: var(--small-header);
+  color: var(--primary-dark);
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.account-update-link a,
+.account-inventory-link a {
+  font-size: var(--med-text);
+  text-decoration: none;
+  color: var(--primary-light);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  background-color: var(--primary-dark);
+  text-align: center;
+}
+
+.account-update-link a:hover,
+.account-inventory-link a:hover {
+  background-color: var(--primary-accent);
+  color: var(--primary-light);
+  cursor: pointer;
+}
+
+/* ------------------------------------------- Update Account Page ----------------------------- */
+
+.account-update-form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.account-update-form-header {
+  font-size: var(--med-header);
+  color: var(--primary-dark);
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.account-password-update-form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.account-password-update-form-header {
+  font-size: var(--med-header);
+  color: var(--primary-dark);
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.account-password-update-form-text {
+  font-size: var(--med-text);
+  color: var(--primary-dark);
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0;
+}
+
 /* ---------------------------- Media Queries for non-mobile ----------------------------- */
 
 @media (min-width: 769px) {

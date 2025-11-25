@@ -6,39 +6,41 @@ const invValidate = require("../utilities/inventory-validation");
 const utilities = require("../utilities");
 
 // Manager view - it says /inv but I assumed that was to start the route, not actually just be literal "/inv"
+// ----------We will check account type for ALL management routes since we need empployee or admin
 router.get(
   "/management",
-  utilities.checkLogin,
+  utilities.checkAccountType,
   handleErrors(invController.buildManagement)
 );
 
 // Building/displaying the forms
 router.get(
   "/management/addClassification",
+  utilities.checkAccountType,
   handleErrors(invController.buildAddClassificationPage)
 );
 router.get(
   "/management/addInventory",
-  utilities.checkLogin,
+  utilities.checkAccountType,
   handleErrors(invController.buildAddInventoryPage)
 );
 
 // This route creates the same "addInevntoryPage" form but with the data filled in
 router.get(
   "/management/edit/:inv_id",
-  utilities.checkLogin,
+  utilities.checkAccountType,
   handleErrors(invController.buildEditInventoryPage)
 );
 
 router.get(
   "/management/delete/:inv_id",
-  utilities.checkLogin,
+  utilities.checkAccountType,
   handleErrors(invController.buildDeleteInventoryPage)
 );
 
 router.post(
   "/management/update",
-  utilities.checkLogin,
+  utilities.checkAccountType,
   invValidate.inventoryRules(),
   invValidate.checkUpdateData,
   handleErrors(invController.updateInventory)
@@ -46,7 +48,7 @@ router.post(
 
 router.post(
   "/management/delete",
-  utilities.checkLogin,
+  utilities.checkAccountType,
   handleErrors(invController.deleteInventory)
 );
 
@@ -55,22 +57,24 @@ router.post(
   "/management/newClassification",
   invValidate.classificationRules(),
   invValidate.checkClassificationData,
-  utilities.checkLogin,
+  utilities.checkAccountType,
   handleErrors(invController.addClassification)
 );
 router.post(
   "/management/newInventory",
   invValidate.inventoryRules(),
   invValidate.checkInventoryData,
-  utilities.checkLogin,
+  utilities.checkAccountType,
   handleErrors(invController.addInventory)
 );
 
 router.get(
   "/management/getInventory/:classification_id",
-  utilities.checkLogin,
+  utilities.checkAccountType,
   handleErrors(invController.getInventoryJSON)
 );
+
+// --------------------- These we do not need to check account type
 
 router.get(
   "/type/:classificationId",
