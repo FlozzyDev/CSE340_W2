@@ -589,6 +589,39 @@ footer {
   font-weight: 500;
 }
 
+.favorite-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.favorite-toggle_on {
+  width: 40px;
+  height: 40px;
+  background-color: yellow;
+}
+.favorite-toggle_off {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+}
+
+.favorite-toggle_on:hover {
+  background-color: rgb(216, 82, 82);
+  cursor: pointer;
+}
+
+.favorite-toggle_off:hover {
+  background-color: yellow;
+  cursor: pointer;
+}
+
 /* --------------------------- Error-page ----------------------------- */
 #error-heading {
   font-size: var(--main-header);
@@ -863,6 +896,37 @@ select {
   cursor: pointer;
 }
 
+.account-favorite-header {
+  font-size: var(--small-header);
+  color: var(--primary-dark);
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.account-favorite-link {
+  font-size: var(--med-text);
+  color: var(--primary-dark);
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.account-favorite-link a {
+  font-size: var(--med-text);
+  text-decoration: none;
+  color: var(--primary-light);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  background-color: var(--primary-dark);
+  text-align: center;
+}
+
+.account-favorite-link a:hover {
+  background-color: var(--primary-accent);
+  color: var(--primary-light);
+  cursor: pointer;
+}
 /* ------------------------------------------- Update Account Page ----------------------------- */
 
 .account-update-form-content {
@@ -926,6 +990,18 @@ select {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     background-color: var(--primary-dark);
+  }
+
+  .favorite-form {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
   }
 
   #hero-section {

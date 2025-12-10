@@ -24,7 +24,7 @@ Util.getNav = async function (req, res, next) {
   return list;
 };
 
-Util.buildClassificationGrid = async function (data) {
+Util.buildClassificationGrid = async function (data, favoriteIds) {
   let grid;
   console.log("data in buildClassificationGrid is: ", data);
   // I was wrong! We want to check if the type doesn't exist, but we do want to return grid and not throw an error if there are simply no vehicles of that type...
@@ -77,6 +77,31 @@ Util.buildClassificationGrid = async function (data) {
         "<span>$" +
         new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
         "</span>";
+      if (favoriteIds.includes(vehicle.inv_id)) {
+        grid +=
+          '<form action="/favorite/delete" method="post" class="favorite-form">';
+        grid +=
+          '<input type="hidden" name="inv_id" value="' +
+          vehicle.inv_id +
+          '" />';
+        grid += '<button type="submit" class="favorite-toggle_on">';
+        grid +=
+          '<img src="/images/site/star_filled.svg" alt="Remove favorite" title="Remove favorite" />';
+        grid += "</button>";
+        grid += "</form>";
+      } else {
+        grid +=
+          '<form action="/favorite/add" method="post" class="favorite-form">';
+        grid +=
+          '<input type="hidden" name="inv_id" value="' +
+          vehicle.inv_id +
+          '" />';
+        grid += '<button type="submit" class="favorite-toggle_off">';
+        grid +=
+          '<img src="/images/site/star_empty.svg" alt="Add favorite" title="Add favorite" />';
+        grid += "</button>";
+        grid += "</form>";
+      }
       grid += "</div>";
       grid += "</li>";
     });
@@ -85,7 +110,7 @@ Util.buildClassificationGrid = async function (data) {
   }
 };
 
-Util.buildItemDetail = async function (data) {
+Util.buildItemDetail = async function (data, isFavorite) {
   let detail;
   // first we check the return is valid, else 404.
   if (!data || data.length === 0) {
@@ -129,6 +154,27 @@ Util.buildItemDetail = async function (data) {
       "<li class='item-detail-miles'><span class='item-header'>Miles: </span>" +
       new Intl.NumberFormat("en-US").format(data[0].inv_miles) +
       "</li>";
+    if (isFavorite) {
+      detail +=
+        '<form action="/favorite/delete" method="post" class="favorite-form">';
+      detail +=
+        '<input type="hidden" name="inv_id" value="' + data[0].inv_id + '" />';
+      detail += '<button type="submit" class="favorite-toggle_on">';
+      detail +=
+        '<img src="/images/site/star_filled.svg" alt="Remove favorite" title="Remove favorite" />';
+      detail += "</button>";
+      detail += "</form>";
+    } else {
+      detail +=
+        '<form action="/favorite/add" method="post" class="favorite-form">';
+      detail +=
+        '<input type="hidden" name="inv_id" value="' + data[0].inv_id + '" />';
+      detail += '<button type="submit" class="favorite-toggle_off">';
+      detail +=
+        '<img src="/images/site/star_empty.svg" alt="Add favorite" title="Add favorite" />';
+      detail += "</button>";
+      detail += "</form>";
+    }
     detail += "</ul>";
     detail += "</div>";
     detail += "</div>";
@@ -201,7 +247,7 @@ Util.checkJWTToken = (req, res, next) => {
       process.env.ACCESS_TOKEN_SECRET,
       function (err, accountData) {
         if (err) {
-          req.flash("Please log in");
+          req.flash("Please log in to access this resource");
           res.clearCookie("jwt");
           return res.redirect("/account/login");
         }
@@ -230,7 +276,7 @@ Util.checkLogin = (req, res, next) => {
   if (res.locals.loggedin) {
     next();
   } else {
-    req.flash("notice", "Please log in.");
+    req.flash("notice", "Please log in to access this resource.");
     return res.redirect("/account/login");
   }
 };

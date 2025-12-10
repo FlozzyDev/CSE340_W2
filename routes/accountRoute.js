@@ -58,4 +58,11 @@ router.post(
 // super simple - clear cookie and redirect to homepage
 router.get("/logout", utilities.handleErrors(accountController.accountLogout));
 
+// new view for favroite vehicle list
+router.get(
+  "/favorites",
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.buildFavoritesPage)
+);
+
 module.exports = router;

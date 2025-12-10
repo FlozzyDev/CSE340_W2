@@ -12,6 +12,7 @@ const app = express();
 const static = require("./routes/static");
 const inventoryRoute = require("./routes/inventoryRoute");
 const accountRoute = require("./routes/accountRoute");
+const favoriteRoute = require("./routes/favoriteRoute");
 const baseController = require("./controllers/baseController");
 const utilities = require("./utilities/");
 const session = require("express-session");
@@ -62,6 +63,7 @@ app.use(static);
 app.get("/", utilities.handleErrors(baseController.buildHome));
 app.use("/account", utilities.handleErrors(accountRoute));
 app.use("/inv", utilities.handleErrors(inventoryRoute));
+app.use("/favorite", utilities.handleErrors(favoriteRoute)); // new favorite routes
 // generic file not found
 app.use(async (req, res, next) => {
   next({ status: 404, message: "Sorry, we appear to have lost that page." });

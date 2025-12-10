@@ -1,18 +1,28 @@
 const invModel = require("../models/inventory-model");
 const utilities = require("../utilities/");
+const favoritesModel = require("../models/favorite-model");
 
 const invCont = {};
 
 invCont.buildByClassificationId = async function (req, res, next) {
   const classification_id = req.params.classificationId;
   const data = await invModel.getInventoryByClassificationId(classification_id);
-  const grid = await utilities.buildClassificationGrid(data);
+
+  let favoriteIds = []; // we need to create an array of all IDs to display proper toggle
+  if (res.locals.loggedin) {
+    const account_id = res.locals.accountData.account_id;
+    const favorites = await favoritesModel.getFavorites(account_id);
+    favoriteIds = favorites.map((favorite) => favorite.inv_id);
+  }
+
+  const grid = await utilities.buildClassificationGrid(data, favoriteIds);
   let nav = await utilities.getNav();
   const className = data[0].classification_name;
   res.render("./inventory/classification", {
     title: className + " vehicles",
     nav,
     grid,
+    favoriteIds, // pass array
     errors: null,
   });
 };
@@ -20,7 +30,14 @@ invCont.buildByClassificationId = async function (req, res, next) {
 invCont.buildByItemId = async function (req, res, next) {
   const inv_id = req.params.invId;
   const data = await invModel.getItemById(inv_id);
-  const detail = await utilities.buildItemDetail(data);
+
+  let isFavorite = false;
+  if (res.locals.loggedin) {
+    const account_id = res.locals.accountData.account_id;
+    const favorite = await favoritesModel.getFavorite(inv_id, account_id);
+    isFavorite = favorite ? true : false;
+  }
+  const detail = await utilities.buildItemDetail(data, isFavorite);
   let nav = await utilities.getNav();
   const title =
     data[0].inv_year + " " + data[0].inv_make + " " + data[0].inv_model;
@@ -28,6 +45,7 @@ invCont.buildByItemId = async function (req, res, next) {
     title: title,
     nav,
     detail,
+    isFavorite,
     errors: null,
   });
 };

@@ -2,6 +2,8 @@ const utilities = require("../utilities");
 const accountModel = require("../models/account-model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const favoriteModel = require("../models/favorite-model");
+const invModel = require("../models/inventory-model");
 
 /* ****************************************
  *  Deliver login view
@@ -276,6 +278,33 @@ async function updatePassword(req, res) {
   res.redirect("/account/");
 }
 
+// new view for favroite vehicle list
+async function buildFavoritesPage(req, res, next) {
+  let nav = await utilities.getNav();
+  const account_id = res.locals.accountData.account_id;
+
+  const favorites = await favoriteModel.getFavorites(account_id);
+  const favoriteIds = favorites.map((favorite) => favorite.inv_id);
+  if (favoriteIds.length === 0) {
+    const grid = "<p>You have no favorite vehicles.</p>";
+    res.render("account/favorites", {
+      title: "Favorite Vehicles",
+      nav,
+      grid,
+      errors: null,
+    });
+  } else {
+    const vehicles = await invModel.getInventoryByIds(favoriteIds);
+    const grid = await utilities.buildClassificationGrid(vehicles, favoriteIds);
+    res.render("account/favorites", {
+      title: "Favorite Vehicles",
+      nav,
+      grid,
+      errors: null,
+    });
+  }
+}
+
 module.exports = {
   buildLoginPage,
   buildRegistrationPage,
@@ -286,4 +315,5 @@ module.exports = {
   buildUpdateAccountPage,
   updateAccount,
   updatePassword,
+  buildFavoritesPage,
 };

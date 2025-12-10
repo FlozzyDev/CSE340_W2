@@ -32,6 +32,21 @@ async function addClassification(classification_name) {
   }
 }
 
+// need a get all items by the array of IDs, which means we need a batch
+async function getInventoryByIds(inv_ids) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.inventory WHERE inv_id = ANY($1)`, // need ANY since we don't know the length at the time
+      [inv_ids]
+    );
+    return data.rows;
+  } catch (error) {
+    console.error("getInventoryByIds error " + error);
+    console.log(`(model) - returning empty array`);
+    return []; // return an emopty array if we get an error
+  }
+}
+
 async function getInventoryByClassificationId(classification_id) {
   try {
     const data = await pool.query(
@@ -164,4 +179,5 @@ module.exports = {
   addInventory,
   updateInventory,
   deleteInventoryItem,
+  getInventoryByIds,
 };
